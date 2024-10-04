@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Slider for Kurit Bulawan</title>
+    <!-- CDN Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <!-- CDN Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Importing the CSS file -->
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+      /* CSS styles optimized for the project */
+
+/* Importing Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* Base styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Variable definitions */
+:root {
+    /* Colors */ 
+    --white_color: rgb(255, 255, 255);
+    --lightblue_color: #ADD8E6;
+    --orange_dark_color: rgb(255, 96, 0);
+    --black_color: rgb(69, 69, 69);
+    --background_color: linear-gradient(to top right, #FFD700, #213780);
+    --font_color : rgb(255, 230, 199);
+}
+
+/* Container styling */
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background-image: var(--background_color); /* If you're using an image */
+    padding-bottom: 1rem;
+    overflow: auto; /* Enable scrolling */
+}
+
+/* Hide scrollbar for Chrome, Safari, Edge, and Opera */
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Header styling */
+header {
+    padding: 2rem 0;
+    margin: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+h1 {
+    color: var(--white_color);
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 0.2rem var(--lightblue_color) solid;
+    text-transform: uppercase;
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+h1 a:hover {
+    color: var(--orange_dark_color); /* Change color on hover */
+}
+
+h1 a:visited{
+    color: var(--white_color);
+}
+   
+/* Card styling */ 
+.cards_box {
+    margin: 0 5rem;
+    padding: 3.5rem 5rem;
+}
+
+a {
+    text-decoration: none;
+}  
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.cards {
+    max-width: 1120px;
+    border-radius: 1.25rem;
+    overflow: hidden;
+}
+  
+.card_details {
+    width: 300px;
+    border-radius: 1.25rem;
+    overflow: hidden;
+}
+  
+.card_img_box {
+    position: relative;
+    background-color: var(--lightblue_color);
+    padding-top: .75rem;
+    margin-bottom: -.75rem;
+}
+  
+.card_data {
+    background: var(--black_color);
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+  
+.card_img {
+    width: 300px;
+    border-radius: 1rem;
+    margin: 0 auto;
+    position: relative;
+    z-index: 5;
+}
+   
+.card_name {
+    font-size: 1rem;
+    color: var(--font_color);
+    margin-bottom: .75rem;
+}
+  
+.card_description {
+    font-weight: 500;
+    margin-bottom: 1.75rem;
+    color: var(--white_color);
+}
+  
+.card_button {
+    display: inline-block;
+    background-color: var(--lightblue_color);
+    padding: .75rem 1.5rem;
+    border-radius: .25rem;
+    color: var(--white_color);
+    font-weight: 600;
+}
+  
+/* Swiper class */
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    content: "";
+}
+  
+.swiper-button-prev, .swiper-button-next {
+    width: initial;
+    height: initial;
+    font-size: 3rem;
+    color: var(--lightblue_color);
+}
+
+.swiper-button-prev:hover, 
+.swiper-button-next:hover {
+    color: var(--orange_dark_color);
+}
+  
+.swiper-button-prev {
+    left: 0;
+}
+  
+.swiper-button-next {
+    right: 0;
+}
+  
+.swiper-pagination-bullet {
+    background-color:var(--lightblue_color);
+    opacity: 1;
+}
+  
+.swiper-pagination-bullet-active,
+.card_button:hover {
+    background-color: var(--orange_dark_color);
+}
+
+@media screen and (max-width: 600px) {
+    h1{
+        font-size: 36px;
+        line-height: 50px;
+    }
+
+    .cards_box {
+        margin: 0 1.5rem;
+        padding: 2rem 2rem;
+    }
+
+    img {
+        max-width: 90%;
+        margin: auto;
+    }
+
+    .cards {
+        max-width: 100%; /* Make sure cards take full width on smaller screens */
+        padding: 1rem; /* Add some padding for spacing */
+    }
+  
+    .card_details {
+        width: 100%; /* Ensure card details take up full width on mobile */
+        border-radius: 1rem;
+    }
+  
+    .card_img_box {
+        padding-top: 0.5rem; /* Adjust padding */
+        margin-bottom: 0; /* Remove negative margin */
+    }
+  
+    .card_data {
+        padding: 1rem; /* Reduce padding for content */
+        border-radius: 0.75rem; /* Slightly smaller border radius */
+    }
+
+    .card_img {
+        width: 100%; /* Allow image to take full width */
+        max-width: 100%; /* Ensure the image does not overflow */
+    }
+  
+    .card_name {
+        font-size: 0.875rem; /* Reduce font size for smaller screens */
+    }
+  
+    .card_description {
+        font-size: 0.875rem; /* Reduce font size */
+        margin-bottom: 1rem; /* Adjust margin */
+    }
+
+    .card_button {
+        font-size: 0.875rem; /* Adjust button text size */
+        padding: 0.5rem 1rem; /* Smaller padding for buttons */
+    }
+
+}
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+    h1 {
+        font-size: 30px; /* Adjust font size for this screen range */
+        line-height: 42px; /* Adjust line height for better readability */
+    }
+
+    .cards_box {
+        margin: 0 2rem; /* Adjust margin for slightly larger devices */
+        padding: 2.5rem 2.5rem; /* Increase padding to give more space */
+    }
+
+    img {
+        max-width: 95%; /* Increase image width slightly */
+        margin: auto; /* Ensure image is centered */
+    }
+
+    .cards {
+        max-width: 100%; /* Ensure the cards take full width */
+        padding: 1.5rem; /* Add more padding for better spacing */
+    }
+  
+    .card_details {
+        width: 90%; /* Ensure card details are a bit narrower for better layout */
+        border-radius: 1.25rem; /* Keep a good border-radius for aesthetics */
+        margin: 0 auto; /* Center the card details */
+    }
+  
+    .card_img_box {
+        padding-top: 1rem; /* Increase padding for better image alignment */
+        margin-bottom: 0; /* Keep margin to zero */
+    }
+  
+    .card_data {
+        padding: 1.25rem; /* Adjust padding for better balance */
+        border-radius: 1rem; /* Maintain a nice border radius */
+    }
+
+    .card_img {
+        width: 90%; /* Slightly reduce image width for better fit */
+        max-width: 90%; /* Ensure image stays within bounds */
+        margin: auto; /* Center the image */
+    }
+  
+    .card_name {
+        font-size: 1rem; /* Adjust font size to suit the screen size */
+    }
+  
+    .card_description {
+        font-size: 1rem; /* Increase font size for better readability */
+        margin-bottom: 1.25rem; /* Adjust margin for better spacing */
+    }
+
+    .card_button {
+        font-size: 1rem; /* Adjust button text size for a better proportion */
+        padding: 0.75rem 1.25rem; /* Increase button padding for better touch area */
+    }
+}
+    </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="heading"><h1><a href="https://www.facebook.com/KuritBulawan">Kurit Bulawan</a></h1></div>
+    </header>
+    <div class="hero_section">
+      <div class="cards_box swiper">
+        <div class="cards">
+           <div class="swiper-wrapper">
+              <!-- Card details -->
+              <section class="card_details swiper-slide">
+                 <div class="card_img_box">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczNs75gfzOMTTTfc4yIyIxCbTRSGNIEIGzmVzIKQvbS3RHZj7LgGZXbsRl7NJxeujCMB1b127IJ-2UMHp5Lec3lvWCAmAPuyImPDoGc1CyPPHliaTmsp8uNDZV76MFcvJUxFyRxkXZOrReuLSV1wcMTz=w827-h591-s-no-gm"  class="card_img">
+                 </div>
+                 <div class="card_data">
+                    <h3 class="card_name">Kurit</h3>
+                    <p class="card_description">
+                     Bulawan
+                    </p>
+                    <a href="https://www.facebook.com/KuritBulawan" class="card_button">Follow</a>
+                 </div>
+              </section>
+              <!-- Repeat similar sections for other cards -->
+              <section class="card_details swiper-slide">
+                <div class="card_img_box">
+                   <img src="https://lh3.googleusercontent.com/pw/AP1GczOBiRS3ilLZXmSSE_5p3aEAes5vKIzwdfWkmjMPgwRObJSmlAbA69w6JUY5Vg0Gv9dpYi-ZnNM9afGGcxuQI5PtaTc8tObjXaLsv7MNvTeMgE5NZmFjpm5XhbedNvkuhIFTwgWPhGBNkKvBvEGynalD=w827-h591-s-no-gm"  class="card_img">
+                </div>
+                <div class="card_data">
+                   <h3 class="card_name">Kurit</h3>
+                   <p class="card_description">
+                    Bulawan
+                   </p>
+                   <a href="https://www.facebook.com/KuritBulawan" class="card_button">Follow</a>
+                </div>
+              </section>
+              <section class="card_details swiper-slide">
+                <div class="card_img_box">
+                   <img src="https://lh3.googleusercontent.com/pw/AP1GczOBiRS3ilLZXmSSE_5p3aEAes5vKIzwdfWkmjMPgwRObJSmlAbA69w6JUY5Vg0Gv9dpYi-ZnNM9afGGcxuQI5PtaTc8tObjXaLsv7MNvTeMgE5NZmFjpm5XhbedNvkuhIFTwgWPhGBNkKvBvEGynalD=w827-h591-s-no-gm"  class="card_img">
+                </div>
+                <div class="card_data">
+                   <h3 class="card_name">Kurit</h3>
+                   <p class="card_description">
+                     Bulawan
+                   </p>
+                   <a href="https://www.facebook.com/KuritBulawan" class="card_button">Follow</a>
+                </div>
+              </section>
+              <section class="card_details swiper-slide">
+                <div class="card_img_box">
+                   <img src="https://lh3.googleusercontent.com/pw/AP1GczOBiRS3ilLZXmSSE_5p3aEAes5vKIzwdfWkmjMPgwRObJSmlAbA69w6JUY5Vg0Gv9dpYi-ZnNM9afGGcxuQI5PtaTc8tObjXaLsv7MNvTeMgE5NZmFjpm5XhbedNvkuhIFTwgWPhGBNkKvBvEGynalD=w827-h591-s-no-gm"  class="card_img">
+                </div>
+                <div class="card_data">
+                    <h3 class="card_name">Kurit</h3>
+                    <p class="card_description">
+                      Bulawan
+                    </p>
+                    <a href="https://www.facebook.com/KuritBulawan" class="card_button">Follow</a>
+                 </div>
+              </section>
+            </div>
+          </div>                            
+        <!-- Navigation buttons -->
+        <div class="swiper-button-next">
+          <i class="fa-solid fa-angle-right"></i>
+        </div>     
+        <div class="swiper-button-prev">
+          <i class="fa-solid fa-angle-left"></i>
+        </div>
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+       </div>        
+    </div>
+  </div>
+  <!-- CDN Swiper JavaScript  -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <!-- Importing the JavaScript file -->
+  <script>
+    let swiperCards = new Swiper(".cards", {
+    loop: true, 
+    spaceBetween: 32, 
+    grabCursor: true, 
+    speed: 800, 
+    
+    slidesPerView: 1, 
+    slidesPerGroup: 1, 
+    
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      dynamicBullets: true, 
+    },
+  
+    navigation: {
+      nextEl: ".swiper-button-next", 
+      prevEl: ".swiper-button-prev", 
+    },
+  
+    breakpoints: {
+      968: {
+        slidesPerView: 2, 
+        slidesPerGroup: 2, 
+      },
+    },
+  });
+  </script>
+</body>   
+</html>
